@@ -11,6 +11,9 @@ def main():
     character_img = pg.image.load("ex01/fig/3.png")
     character_img = pg.transform.flip(character_img, True, False)
     
+    ten_rad_chara = pg.transform.rotozoom(character_img, 10, 1.0)
+    chara_lst = [character_img, ten_rad_chara]
+    
     tmr = 0
     while True:
         for event in pg.event.get():
@@ -18,6 +21,8 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(character_img, [400, 300])
+        
+        
         pg.display.update()
         tmr += 1        
         clock.tick(10)
