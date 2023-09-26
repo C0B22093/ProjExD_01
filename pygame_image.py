@@ -14,18 +14,25 @@ def main():
     ten_rad_chara = pg.transform.rotozoom(character_img, 10, 1.0)
     chara_lst = [character_img, ten_rad_chara]
     
-    tmr = 0
+    tmr = 0 # タイマー
+    bg_x = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        screen.blit(bg_img, [0, 0])
-        screen.blit(character_img, [400, 300])
+        screen.blit(bg_img, [bg_x, 0])
+        if bg_x < -800: 
+            screen.blit(bg_img, [bg_x+1600, 0]) # 800から1600まで伸びるので、その間の800を別の背景で補間
         
-        
+        screen.blit(chara_lst[tmr%2], [300, 200])
+
         pg.display.update()
-        tmr += 1        
-        clock.tick(10)
+        tmr += 1 
+        bg_x -= 1
+        # init_img = 0
+        if bg_x < -1600: 
+            bg_x = 0  
+        clock.tick(100)
 
 
 if __name__ == "__main__":
